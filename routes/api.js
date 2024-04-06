@@ -38,6 +38,11 @@ module.exports = function (app) {
         return;
       }
 
+      if(solver.checkIfAlreadyThere(puzzle, row, col, value)){
+        res.send({ valid: true });
+        return
+      }
+
 
       if (!solver.checkRow(puzzle, row, col, value)) {
         valid = false;

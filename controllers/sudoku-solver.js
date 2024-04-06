@@ -17,6 +17,7 @@ class SudokuSolver {
       }
       return { valid: true };
     }
+    
   
     checkRow(puzzleString, row, col, value) {
       const rowStart = row * 9;
@@ -43,6 +44,11 @@ class SudokuSolver {
         }
       }
       return !regionValues.includes(value);
+    }
+
+    checkIfAlreadyThere(puzzleString, row, col, value) {
+      const indexPlace = row * 9 + col;
+      return puzzleString[indexPlace] === value;
     }
   
     solve(puzzleString) {
