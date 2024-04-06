@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 fccTestingRoutes(app);
 
 // User routes
+
 apiRoutes(app);
     
 //404 Not Found Middleware

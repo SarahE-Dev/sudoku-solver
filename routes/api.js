@@ -15,25 +15,25 @@ module.exports = function (app) {
       let conflict = [];
 
       if (!puzzle || !coordinate || !value) {
-        res.json({ error: 'Required field(s) missing' });
+        res.send({ error: 'Required field(s) missing' });
         return
       }
 
       let validate = solver.validate(puzzle);
 
       if (!validate.valid) {
-        res.json(validate);
+        res.send(validate);
         return;
       }
 
 
       if (value < 1 || value > 9) {
-        res.json({ error: 'Invalid value' });
+        res.send({ error: 'Invalid value' });
         return
       }
 
       if (row < 0 || row > 8 || col < 0 || col > 8) {
-        return res.json({ error: 'Invalid coordinate' });
+        return res.send({ error: 'Invalid coordinate' });
       }
 
       if (!solver.checkRow(puzzle, row, col, value)) {
@@ -52,9 +52,9 @@ module.exports = function (app) {
       }
 
       if (valid) {
-        res.json({ valid: true });
+        res.send({ valid: true });
       } else {
-        res.json({ valid: false, conflict });
+        res.send({ valid: false, conflict });
       }
 
     });
