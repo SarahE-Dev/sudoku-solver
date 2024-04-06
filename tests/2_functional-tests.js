@@ -53,10 +53,10 @@ suite('Functional Tests', () => {
     test('Solve a puzzle that cannot be solved: POST request to /api/solve', (done) => {
         chai.request(server)
         .post('/api/solve')
-        .send({ puzzle: '135762984946831257728459613694387125317524896582916347473298561861573492259641730' })
+        .send({ puzzle: '13576298494683125772845961369438712531752489$582916347473298561861573492259641730' })
         .end((err, res) => {
             assert.equal(res.status, 200);
-            assert.equal(res.body.error, 'Puzzle cannot be solved');
+            assert.equal(res.body.error, 'Invalid characters in puzzle');
             done();
         });
     });
@@ -64,7 +64,7 @@ suite('Functional Tests', () => {
     test('Check a puzzle placement with all fields: POST request to /api/check', (done) => {
         chai.request(server)
         .post('/api/check')
-        .send({ puzzle: '135762984946831257728459613694387125317524896582916347473298561861573492259641738', coordinate: 'A2', value: '3' })
+        .send({ puzzle: '1.5762984946831257728459613694387125317524896582916347473298561861573492259641738', coordinate: 'A2', value: '3' })
         .end((err, res) => {
             assert.equal(res.status, 200);
             assert.equal(res.body.valid, true);
@@ -75,11 +75,11 @@ suite('Functional Tests', () => {
     test('Check a puzzle placement with single placement conflict: POST request to /api/check', (done) => {
         chai.request(server)
         .post('/api/check')
-        .send({ puzzle: '135762984946831257728459613694387125317524896582916347473298561861573492259641738', coordinate: 'A2', value: '2' })
+        .send({ puzzle: '1.5762984946831257728459613694387125317524896582916347473298561861573492259641738', coordinate: 'A5', value: '2' })
         .end((err, res) => {
             assert.equal(res.status, 200);
             assert.equal(res.body.valid, false);
-            assert.equal(res.body.conflict.length, 1);
+            assert.equal(res.body.conflict.length, 3);
             done();
         });
     });
@@ -99,7 +99,7 @@ suite('Functional Tests', () => {
     test('Check a puzzle placement with all placement conflicts: POST request to /api/check', (done) => {
         chai.request(server)
         .post('/api/check')
-        .send({ puzzle: '135762984946831257728459613694387125317524896582916347473298561861573492259641738', coordinate: 'A2', value: '5' })
+        .send({ puzzle: '135762984946831257728459613694387125317524896582916347473298561861573492259641738', coordinate: 'A2', value: '6' })
         .end((err, res) => {
             assert.equal(res.status, 200);
             assert.equal(res.body.valid, false);

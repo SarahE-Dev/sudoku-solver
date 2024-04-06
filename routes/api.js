@@ -9,15 +9,18 @@ module.exports = function (app) {
   app.route('/api/check')
     .post((req, res) => {
       let { puzzle, coordinate, value } = req.body;
-      let row = coordinate[0].toUpperCase().charCodeAt(0) - 65;
-      let col = parseInt(coordinate[1]) - 1;
-      let valid = true;
-      let conflict = [];
-
       if (!puzzle || !coordinate || !value) {
         res.send({ error: 'Required field(s) missing' });
         return
       }
+      let row = coordinate.toUpperCase().charCodeAt(0) - 65;
+      console.log(row);
+      let coltouse = coordinate.slice(1);
+      let col = parseInt(coltouse) - 1;
+      let valid = true;
+      let conflict = [];
+
+      
 
       let validate = solver.validate(puzzle);
 
@@ -33,7 +36,8 @@ module.exports = function (app) {
       }
 
       if (row < 0 || row > 8 || col < 0 || col > 8) {
-        return res.send({ error: 'Invalid coordinate' });
+        res.send({ error: 'Invalid coordinate' });
+        return
       }
 
       if (!solver.checkRow(puzzle, row, col, value)) {
