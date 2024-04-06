@@ -16,7 +16,7 @@ module.exports = function (app) {
       let row = coordinate.toUpperCase().charCodeAt(0) - 65;
       let coltouse = coordinate.slice(1);
       let col = parseInt(coltouse) - 1;
-      if (row < 0 || row > 8 || col < 0 || col > 8) {
+      if (!/^[A-I]$/.test(coordinate[0]) || !/^[1-9]$/.test(coordinate[1])){
         res.send({ error: 'Invalid coordinate' });
         return
       }
