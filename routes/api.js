@@ -55,10 +55,12 @@ module.exports = function (app) {
         conflict.push('region');
       }
 
-      if (valid) {
-        res.send({ valid: true });
-      } else {
+      if (!valid) {
         res.send({ valid: false, conflict });
+        return
+      } else {
+        res.send({ valid: true });                             
+        return
       }
 
     });
