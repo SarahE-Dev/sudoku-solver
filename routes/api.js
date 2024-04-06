@@ -19,7 +19,15 @@ module.exports = function (app) {
       let valid = true;
       let conflict = [];
 
-      
+      if (row < 0 || row > 8 || col < 0 || col > 8) {
+        res.send({ error: 'Invalid coordinate' });
+        return
+      }
+
+      if (value < 1 || value > 9) {
+        res.send({ error: 'Invalid value' });
+        return
+      }
 
       let validate = solver.validate(puzzle);
 
@@ -29,15 +37,9 @@ module.exports = function (app) {
       }
 
 
-      if (value < 1 || value > 9) {
-        res.send({ error: 'Invalid value' });
-        return
-      }
+      
 
-      if (row < 0 || row > 8 || col < 0 || col > 8) {
-        res.send({ error: 'Invalid coordinate' });
-        return
-      }
+      
 
       if (!solver.checkRow(puzzle, row, col, value)) {
         valid = false;
