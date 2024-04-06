@@ -14,7 +14,6 @@ module.exports = function (app) {
         return
       }
       let row = coordinate.toUpperCase().charCodeAt(0) - 65;
-      console.log(row);
       let coltouse = coordinate.slice(1);
       let col = parseInt(coltouse) - 1;
       let valid = true;
