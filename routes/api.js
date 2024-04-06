@@ -21,7 +21,7 @@ module.exports = function (app) {
         return
       }
 
-      if (value < 1 || value > 9) {
+      if (!/^[1-9]$/.test(value)) {
         res.send({ error: 'Invalid value' });
         return
       }
