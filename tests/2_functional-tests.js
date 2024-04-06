@@ -152,6 +152,18 @@ suite('Functional Tests', () => {
         });
     });
 
+    test('Check a puzzle placement with incorrect placement: POST request to /api/check', (done) => {
+        chai.request(server)
+        .post('/api/check')
+        .send({ puzzle: '135762984946831257728459613694387125317524896582916347473298561861573492259641738', coordinate: 'A2', value: '5' })
+        .end((err, res) => {
+            assert.equal(res.status, 200);
+            assert.equal(res.body.valid, false);
+            assert.equal(res.body.conflict.length, 3);
+            done();
+        });
+    });
+
 }
 
 )
