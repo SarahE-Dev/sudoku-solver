@@ -16,9 +16,6 @@ module.exports = function (app) {
       let row = coordinate.toUpperCase().charCodeAt(0) - 65;
       let coltouse = coordinate.slice(1);
       let col = parseInt(coltouse) - 1;
-      let valid = true;
-      let conflict = [];
-
       if (row < 0 || row > 8 || col < 0 || col > 8) {
         res.send({ error: 'Invalid coordinate' });
         return
@@ -28,6 +25,11 @@ module.exports = function (app) {
         res.send({ error: 'Invalid value' });
         return
       }
+
+      let valid = true;
+      let conflict = [];
+
+      
 
       let validate = solver.validate(puzzle);
 
