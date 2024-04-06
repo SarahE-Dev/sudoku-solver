@@ -37,10 +37,6 @@ module.exports = function (app) {
       }
 
 
-      
-
-      
-
       if (!solver.checkRow(puzzle, row, col, value)) {
         valid = false;
         conflict.push('row');
@@ -59,8 +55,10 @@ module.exports = function (app) {
       if (!valid) {
         res.send({ valid: false, conflict });
         return
-      } else {
-        res.send({ valid: true });                             
+      } 
+
+      if(valid){
+        res.send({ valid: true });
         return
       }
 
